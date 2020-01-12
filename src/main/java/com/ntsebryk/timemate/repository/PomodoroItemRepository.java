@@ -4,6 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.ntsebryk.timemate.domain.PomodoroItem;
 
-public interface PomodoroItemRepository extends MongoRepository<PomodoroItem, Long>{
+public interface PomodoroItemRepository extends MongoRepository<PomodoroItem, String>{
 
 }

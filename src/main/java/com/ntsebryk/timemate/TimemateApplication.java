@@ -10,5 +10,4 @@ public class TimemateApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TimemateApplication.class, args);
 	}
-
 }

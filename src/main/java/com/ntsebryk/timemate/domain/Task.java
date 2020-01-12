@@ -1,16 +1,17 @@
 package com.ntsebryk.timemate.domain;
 
-import java.time.LocalDateTime;
+import java.util.Collection;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,8 +20,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
-public class PomodoroItem {
-	private LocalDateTime startTime;
-	private int duration;
+@Document(collection="tasks")
+@TypeAlias("task")
+
+public class Task {
+	@Id
+	String id;
+	String itemName;
+	String userId;
+	@UniqueElements
+	Collection<PomodoroItem> items;
 }

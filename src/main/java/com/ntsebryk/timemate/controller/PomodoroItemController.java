@@ -17,7 +17,7 @@ import com.ntsebryk.timemate.domain.PomodoroItem;
 import com.ntsebryk.timemate.repository.PomodoroItemRepository;
 
 @RestController
-@RequestMapping("/api/work-item")
+@RequestMapping("/api/work-items")
 public class PomodoroItemController {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class PomodoroItemController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void savePomodoroItem(@Valid @RequestBody PomodoroItem pItem) {
-		pomodoroRepository.save(pItem);
+		pomodoroRepository.insert(pItem);
 	}
 	
 	@GetMapping
