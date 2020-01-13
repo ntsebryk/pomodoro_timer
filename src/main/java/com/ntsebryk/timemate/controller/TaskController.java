@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,11 @@ public class TaskController {
 	public Task getTaskById(@PathVariable String id) {
 		return taskRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
 				String.format("Resourse with id %s not found", id)));
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public void deleteTaskById(@PathVariable String id) {
+		 taskRepository.deleteById(id);
 	}
 
 }
