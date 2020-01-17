@@ -15,7 +15,7 @@ import com.ntsebryk.timemate.domain.PomodoroItem;
 import com.ntsebryk.timemate.service.TaskService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/tasks/")
 public class PomodoroItemController {
 	
 	@Autowired

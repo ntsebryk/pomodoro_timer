@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,9 @@ public class Task {
 	@Id
 	String id;
 	String itemName;
-	String userId;
+	@JsonIgnore
+	@DBRef
+	User user;
 	@UniqueElements
 	Collection<PomodoroItem> items;
 }
