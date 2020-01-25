@@ -1,4 +1,4 @@
-package com.ntsebryk.timemate;
+package com.ntsebryk.timemate.configuration;
 
 import java.io.IOException;
 

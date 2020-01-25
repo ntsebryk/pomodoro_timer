@@ -1,4 +1,4 @@
-package com.ntsebryk.timemate;
+package com.ntsebryk.timemate.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -37,22 +37,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	//TODO check why is this needed
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic()
+			.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.exceptionHandling().authenticationEntryPoint(authPoint)
 			.and()
 			.authorizeRequests()
 			.antMatchers("api/**").authenticated()
-			.anyRequest().authenticated();
+			.anyRequest().authenticated()
+			.and().formLogin();
 	}
 
 }

@@ -24,8 +24,6 @@ public class UserService implements UserDetailsService {
 		if (Objects.isNull(user)) {
 			return null;
 		}
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles()));
+		return user;
 	}
-
 }

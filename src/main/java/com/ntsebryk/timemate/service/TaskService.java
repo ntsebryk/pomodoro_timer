@@ -2,15 +2,21 @@ package com.ntsebryk.timemate.service;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticatedPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ntsebryk.timemate.domain.PomodoroItem;
 import com.ntsebryk.timemate.domain.Task;
+import com.ntsebryk.timemate.domain.User;
 import com.ntsebryk.timemate.repository.TaskRepository;
+import com.ntsebryk.timemate.repository.UserRepository;
 
 @Service
 public class TaskService {
@@ -31,6 +37,7 @@ public class TaskService {
 		
 		taskRepository.insert(task);
 	}
+
 	
 	public void addItemToTask(String taskId, PomodoroItem item) {
 		//add validation of startTime, prohibit startTime that intersect other item
