@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ntsebryk.timemate.domain.User;
 import com.ntsebryk.timemate.repository.UserRepository;
+import com.ntsebryk.timemate.service.UserService;
 
 @Component
 public class DbInitializer implements CommandLineRunner {
@@ -14,18 +15,20 @@ public class DbInitializer implements CommandLineRunner {
 	@Autowired
 	UserRepository userRepository;
 	
-	@Autowired
-	PasswordEncoder passEncoder;
+	@Autowired 
+	UserService userService;
 
 	@Override
 	public void run(String... args) throws Exception {
 		User adminUser = new User();
 		adminUser.setUsername("admin");
-		adminUser.setPassword(passEncoder.encode("123456"));
+		adminUser.setPassword("123456");
 		adminUser.setRoles("ADMIN");
 		
+		
+		
 		if (userRepository.findByUsername(adminUser.getUsername()) == null) {
-			userRepository.insert(adminUser);
+			userService.createUser(adminUser);
 		}
 	}
 

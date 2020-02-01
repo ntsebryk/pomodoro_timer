@@ -38,10 +38,6 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 	
-	@Autowired
-	Authentication authentication;
-
-
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void addTask(@Valid @RequestBody Task task, @AuthenticationPrincipal User currentUser) {

@@ -2,12 +2,11 @@ package com.ntsebryk.timemate.domain;
 
 import java.util.Collection;
 
+import javax.validation.constraints.NotBlank;
+
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,6 +27,7 @@ import lombok.ToString;
 public class Task {
 	@Id
 	String id;
+	@NotBlank
 	String itemName;
 	@JsonIgnore
 	@DBRef
