@@ -23,7 +23,7 @@ public class DbInitializer implements CommandLineRunner {
 		User adminUser = new User();
 		adminUser.setUsername("admin");
 		adminUser.setPassword("123456");
-		adminUser.setRoles("ADMIN");
+		adminUser.setRoles("ROLE_ADMIN");
 		
 		
 		

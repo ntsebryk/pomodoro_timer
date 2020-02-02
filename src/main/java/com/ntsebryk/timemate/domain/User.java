@@ -2,17 +2,16 @@ package com.ntsebryk.timemate.domain;
 
 import java.util.Collection;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -25,6 +24,10 @@ public class User implements UserDetails {
 	@Indexed(unique = true)
 	String username;
 	String password;
+	
+	@NotEmpty
+	@Email
+	String mail;
 	String roles = "USER";
 
 	@Override

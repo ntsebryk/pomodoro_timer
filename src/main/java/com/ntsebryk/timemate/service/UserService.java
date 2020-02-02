@@ -5,6 +5,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +24,9 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired
 	PasswordEncoder passEncoder;
+	
+	@Autowired
+	MailService mailService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,7 +40,22 @@ public class UserService implements UserDetailsService {
 	
 	public User createUser(User user) {
 		user.setPassword(passEncoder.encode(user.getPassword()));
-		return userRepository.insert(user);
+		User dbUser = userRepository.insert(user);
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		
+		message.setTo(dbUser.getMail());
+		message.setSubject("Welcome in TimeMate\n");
+		message.setText(String.format("Welcome Mate!\n"
+				+ "You've been registered in TimeMate Service.\n"
+				+ "Please, use this credentials to login:\n"
+				+ "username: %s \n"
+				+ "password: %s \n"
+				+ "\n"
+				+ "Enjoy it!", dbUser.getUsername(), user.getPassword()));
+		
+		mailService.sendMessage(message);
+		return dbUser;
 	}
 	
 	public User updateUser(User user) {
