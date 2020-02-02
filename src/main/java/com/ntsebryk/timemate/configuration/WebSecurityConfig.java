@@ -47,9 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("api/**").authenticated()
-			//TODO role verification is not working
-			.antMatchers("api/users").hasRole("ADMIN")
+			.antMatchers("/api/users/**").hasRole("ADMIN")
+			.antMatchers("/api/**").authenticated()
 			.anyRequest().authenticated();
 	}
 
